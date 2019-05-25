@@ -581,6 +581,7 @@ The following parameters will be the same for each process in the set:
   connection if Strong Crypto for .NET is not enabled. Fixes
   [Issue #142](https://github.com/PowerShell/PSDscResources/issues/142)
 * Improved speed of Test-IsNanoServer function
+  [Issue #155](https://github.com/PowerShell/PSDscResources/issues/155)
 
 ### 2.11.0.0
 
