@@ -777,26 +777,26 @@ function Get-WebRequestResponse
     {
         $uriScheme = $Uri.Scheme
 
-        Write-Verbose -Message ($script:localizedData.CreatingTheSchemeStream -f $uriScheme) -Verbose
+        Write-Verbose -Message ($script:localizedData.CreatingTheSchemeStream -f $uriScheme)
         $webRequest = Get-WebRequest -Uri $Uri
     
-        Write-Verbose -Message ($script:localizedData.SettingDefaultCredential) -Verbose
+        Write-Verbose -Message ($script:localizedData.SettingDefaultCredential)
         $webRequest.Credentials = [System.Net.CredentialCache]::DefaultCredentials
         $webRequest.AuthenticationLevel = [System.Net.Security.AuthenticationLevel]::None
     
         if ($uriScheme -eq 'http')
         {
             # Default value is MutualAuthRequested, which applies to the https scheme
-            Write-Verbose -Message ($script:localizedData.SettingAuthenticationLevel) -Verbose
+            Write-Verbose -Message ($script:localizedData.SettingAuthenticationLevel)
             $webRequest.AuthenticationLevel = [System.Net.Security.AuthenticationLevel]::None
         }
         elseif ($uriScheme -eq 'https' -and -not [String]::IsNullOrEmpty($ServerCertificateValidationCallback))
         {
-            Write-Verbose -Message $script:localizedData.SettingCertificateValidationCallback -Verbose
+            Write-Verbose -Message $script:localizedData.SettingCertificateValidationCallback
             $webRequest.ServerCertificateValidationCallBack = (Get-ScriptBlock -FunctionName $ServerCertificateValidationCallback)
         }
     
-        Write-Verbose -Message ($script:localizedData.GettingTheSchemeResponseStream -f $uriScheme) -Verbose
+        Write-Verbose -Message ($script:localizedData.GettingTheSchemeResponseStream -f $uriScheme)
         $responseStream = Get-WebRequestResponseStream -WebRequest $webRequest
 
         return $responseStream
