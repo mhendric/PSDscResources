@@ -226,12 +226,22 @@ try
                         $job = $serverResult.Job             
 
                         # Wait for the file server to be ready to receive requests
+                        Write-Verbose -Message "$([DateTime]::Now): Waiting for file server start"
+
                         $fileServerStarted.WaitOne(30000)
+
+                        Write-Verbose -Message "$([DateTime]::Now): Finished waiting for file server start"
+
+                        Start-Sleep -Seconds 10
 
                         { Set-TargetResource -Ensure 'Present' -Path $baseUrl -ProductId $script:packageId } | Should Throw
 
+                        Start-Sleep -Seconds 10
+
                         Set-TargetResource -Ensure 'Present' -Path $msiUrl -ProductId $script:packageId
                         Test-PackageInstalledById -ProductId $script:packageId | Should Be $true
+
+                        Start-Sleep -Seconds 10
 
                         Set-TargetResource -Ensure 'Absent' -Path $msiUrl -ProductId $script:packageId
                         Test-PackageInstalledById -ProductId $script:packageId | Should Be $false
