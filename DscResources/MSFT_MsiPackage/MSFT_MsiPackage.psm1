@@ -848,8 +848,16 @@ function Get-WebRequestResponseStream
         $WebRequest
     )
 
+    Write-Verbose -Message 'Getting Response' -Verbose
+
     $response = ([System.Net.HttpWebRequest]$WebRequest).GetResponse()
+
+    Write-Verbose -Message 'Getting Response Stream' -Verbose
+
     $responseStream = $response.GetResponseStream()
+
+    Write-Verbose -Message 'Returning Response Stream' -Verbose
+
     return $responseStream
 
     #return (([System.Net.HttpWebRequest]$WebRequest).GetResponse()).GetResponseStream()
