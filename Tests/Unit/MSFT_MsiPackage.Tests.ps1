@@ -219,13 +219,13 @@ Describe 'MsiPackage Unit Tests' {
                     @{ Command = 'Assert-PathExtensionValid'; Times = 1 }
                     @{ Command = 'New-LogFile'; Times = 1 }
                     @{ Command = 'New-PSDrive'; Times = 0 }
-                    @{ Command = 'Test-Path'; Times = 2; Custom = 'to the package cache' }
+                    @{ Command = 'Test-Path'; Times = 3; Custom = 'to the package cache' }
                     @{ Command = 'New-Item'; Times = 0; Custom = 'directory for the package cache' }
                     @{ Command = 'New-Object'; Times = 1; Custom = 'file stream to copy the response to' }
                     @{ Command = 'Get-WebRequestResponse'; Times = 1 }
                     @{ Command = 'Copy-ResponseStreamToFileStream'; Times = 1 }
                     @{ Command = 'Close-Stream'; Times = 2 }
-                    @{ Command = 'Test-Path'; Times = 2; Custom = 'to the MSI file' }
+                    @{ Command = 'Test-Path'; Times = 3; Custom = 'to the MSI file' }
                     @{ Command = 'Assert-FileValid'; Times = 1 }
                     @{ Command = 'Get-MsiProductCode'; Times = 1 }
                     @{ Command = 'Start-MsiProcess'; Times = 1 }
@@ -250,13 +250,13 @@ Describe 'MsiPackage Unit Tests' {
                     @{ Command = 'Assert-PathExtensionValid'; Times = 1 }
                     @{ Command = 'New-LogFile'; Times = 1 }
                     @{ Command = 'New-PSDrive'; Times = 0 }
-                    @{ Command = 'Test-Path'; Times = 2; Custom = 'to the package cache' }
+                    @{ Command = 'Test-Path'; Times = 3; Custom = 'to the package cache' }
                     @{ Command = 'New-Item'; Times = 0; Custom = 'directory for the package cache' }
                     @{ Command = 'New-Object'; Times = 1; Custom = 'file stream to copy the response to' }
                     @{ Command = 'Get-WebRequestResponse'; Times = 1 }
                     @{ Command = 'Copy-ResponseStreamToFileStream'; Times = 1 }
                     @{ Command = 'Close-Stream'; Times = 2 }
-                    @{ Command = 'Test-Path'; Times = 2; Custom = 'to the MSI file' }
+                    @{ Command = 'Test-Path'; Times = 3; Custom = 'to the MSI file' }
                     @{ Command = 'Assert-FileValid'; Times = 1 }
                     @{ Command = 'Get-MsiProductCode'; Times = 1 }
                     @{ Command = 'Start-MsiProcess'; Times = 1 }
