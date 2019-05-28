@@ -200,13 +200,11 @@ try
 
                         Write-Verbose -Message "$([DateTime]::Now): Finished waiting for file server start" -Verbose
 
-                        Start-Sleep -Seconds 10
-
                         netstat -anb | Write-Verbose -Verbose
 
-                        { Set-TargetResource -Ensure 'Present' -Path $baseUrl -ProductId $script:packageId } | Should Throw
+                        get-nettcpconnection -LocalPort 1242 -ErrorAction SilentlyContinue | write-verbose -verbose
 
-                        Start-Sleep -Seconds 10
+                        { Set-TargetResource -Ensure 'Present' -Path $baseUrl -ProductId $script:packageId } | Should Throw
 
                         netstat -anb | Write-Verbose -Verbose
 
@@ -260,6 +258,8 @@ try
                         Write-Verbose -Message "$([DateTime]::Now): Finished waiting for file server start" -Verbose
 
                         netstat -anb | Write-Verbose -Verbose
+
+                        get-nettcpconnection -LocalPort 1243 -ErrorAction SilentlyContinue | write-verbose -verbose
 
                         Start-Sleep -Seconds 10
 
