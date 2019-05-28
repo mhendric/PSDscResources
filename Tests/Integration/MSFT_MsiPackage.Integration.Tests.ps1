@@ -182,6 +182,9 @@ try
 
                     try
                     {
+                        Write-Verbose 'Setting up HTTP server'
+                        netstat -anb | Write-Verbose -Verbose
+
                         'Http tests:' >> $script:logFile
 
                         $serverResult = Start-Server -FilePath $script:msiLocation -LogPath $script:logFile -Https $false
@@ -191,15 +194,21 @@ try
                         # Wait for the file server to be ready to receive requests
                         Write-Verbose -Message "$([DateTime]::Now): Waiting for file server start" -Verbose
 
+                        netstat -anb | Write-Verbose -Verbose
+
                         $fileServerStarted.WaitOne(30000)
 
                         Write-Verbose -Message "$([DateTime]::Now): Finished waiting for file server start" -Verbose
 
                         Start-Sleep -Seconds 10
 
+                        netstat -anb | Write-Verbose -Verbose
+
                         { Set-TargetResource -Ensure 'Present' -Path $baseUrl -ProductId $script:packageId } | Should Throw
 
                         Start-Sleep -Seconds 10
+
+                        netstat -anb | Write-Verbose -Verbose
 
                         Set-TargetResource -Ensure 'Present' -Path $msiUrl -ProductId $script:packageId
                         Test-PackageInstalledById -ProductId $script:packageId | Should Be $true
@@ -229,6 +238,9 @@ try
 
                     try
                     {
+                        Write-Verbose 'Setting up HTTPS server'
+                        netstat -anb | Write-Verbose -Verbose
+
                         'Https tests:' >> $script:logFile
 
                         $serverResult = Start-Server -FilePath $script:msiLocation -LogPath $script:logFile -Https $true
@@ -238,15 +250,21 @@ try
                         # Wait for the file server to be ready to receive requests
                         Write-Verbose -Message "$([DateTime]::Now): Waiting for file server start" -Verbose
 
+                        netstat -anb | Write-Verbose -Verbose
+
                         $fileServerStarted.WaitOne(30000)
 
                         Write-Verbose -Message "$([DateTime]::Now): Finished waiting for file server start" -Verbose
+
+                        netstat -anb | Write-Verbose -Verbose
 
                         Start-Sleep -Seconds 10
 
                         { Set-TargetResource -Ensure 'Present' -Path $baseUrl -ProductId $script:packageId } | Should Throw
 
                         Start-Sleep -Seconds 10
+
+                        netstat -anb | Write-Verbose -Verbose
 
                         Set-TargetResource -Ensure 'Present' -Path $msiUrl -ProductId $script:packageId
                         Test-PackageInstalledById -ProductId $script:packageId | Should Be $true
