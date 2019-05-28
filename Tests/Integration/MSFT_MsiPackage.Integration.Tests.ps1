@@ -226,6 +226,9 @@ try
                         #>
                         Stop-Server -FileServerStarted $fileServerStarted -Job $job
                     }
+
+                    Write-Verbose 'Showing listener log' -Verbose
+                    Get-Content $script:logFile | Write-Verbose -Verbose
                 }
 
                 It 'Should correctly install and remove a package from a HTTPS URL' -Skip:$script:skipHttpsTest {
@@ -282,6 +285,9 @@ try
                         #>
                         Stop-Server -FileServerStarted $fileServerStarted -Job $job
                     }
+
+                    Write-Verbose 'Showing listener log' -Verbose
+                    Get-Content $script:logFile | Write-Verbose -Verbose
                 }
 
                 It 'Should write to the specified log path' {
