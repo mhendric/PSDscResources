@@ -1,6 +1,8 @@
 ﻿$errorActionPreference = 'Stop'
 Set-StrictMode -Version 'Latest'
 
+$testJobPrefix = 'MsiPackageTestJob'
+
 <#
     .SYNOPSIS
         Tests if the package with the given Id is installed.
@@ -465,7 +467,27 @@ function Start-Server
         }
     }
 
-    $job = Start-Job -ScriptBlock $server -ArgumentList @( $FilePath, $LogPath, $Https )
+    if ($Https)
+    {
+        $jobName = $testJobPrefix + 'Https'
+    }
+    else
+    {
+        $jobName = $testJobPrefix + 'Http'
+    }
+
+    $job = Start-Job -ScriptBlock $server -Name $jobName -ArgumentList @( $FilePath, $LogPath, $Https )
+
+    # Verify that the job is receivable and does not contain an exception. If it does, re-throw it.
+    try
+    {
+        $receivedJob = $job | Receive-Job
+    }
+    catch
+    {
+        Write-Error -Message 'Failed to setup HTTP(S) listener for MsiPackage Tests'
+        throw $_
+    }
 
     <#
         Return the event object so that client knows when it can start sending requests and 
@@ -514,6 +536,22 @@ function Stop-Server
         Stop-Job -Job $Job
         Remove-Job -Job $Job
     }
+}
+
+<#
+    .SYNOPSIS
+        Removes any jobs associated with HTTP(S) servers that were created
+        for MsiPackage tests.
+#>
+function Stop-EveryTestServerInstance
+{
+    [CmdletBinding()]
+    param
+    (
+    )
+
+    Get-Job -Name "$($testJobPrefix)*" | Stop-Job
+    Get-Job -Name "$($testJobPrefix)*" | Remove-Job
 }
 
 <#
@@ -1061,4 +1099,5 @@ Export-ModuleMember -Function `
     New-TestMsi, `
     Start-Server, `
     Stop-Server, `
-    Test-PackageInstalledById
+    Test-PackageInstalledById, `
+    Stop-EveryTestServerInstance

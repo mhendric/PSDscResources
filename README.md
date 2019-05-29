@@ -577,6 +577,14 @@ The following parameters will be the same for each process in the set:
 
 ### Unreleased
 
+* Improved speed of Test-IsNanoServer function
+  [Issue #155](https://github.com/PowerShell/PSDscResources/issues/155)
+* Reverts first attempted fix for #142, which was made in #143, as the problems
+  still intermittently appeared even with Strong Crypto enabled. Adds checks to
+  ensure that the test HTTP(S) server for MsiPackage tests is in a
+  valid state prior to running tests, and bubbles up an exception if it is
+  not. Also adds additional checks to ensure that test HTTP(S) server is
+  stopped prior to starting another.
 * Fixes issue where MsiPackage Integration tests fail to make an HTTPS
   connection if Strong Crypto for .NET is not enabled. Fixes
   [Issue #142](https://github.com/PowerShell/PSDscResources/issues/142)
