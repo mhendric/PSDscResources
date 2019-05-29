@@ -199,6 +199,12 @@ try
                         Set-TargetResource -Ensure 'Absent' -Path $msiUrl -ProductId $script:packageId
                         Test-PackageInstalledById -ProductId $script:packageId | Should Be $false
                     }
+                    catch
+                    {
+                        Write-Verbose 'Caught exception performing HTTP server tests. Outputting HTTP server log.' -Verbose
+                        $script:logFile | Write-Verbose -Verbose
+                        throw $_
+                    }
                     finally
                     {
                         <#
@@ -238,6 +244,12 @@ try
 
                         Set-TargetResource -Ensure 'Absent' -Path $msiUrl -ProductId $script:packageId
                         Test-PackageInstalledById -ProductId $script:packageId | Should Be $false
+                    }
+                    catch
+                    {
+                        Write-Verbose 'Caught exception performing HTTPS server tests. Outputting HTTPS server log.' -Verbose
+                        $script:logFile | Write-Verbose -Verbose
+                        throw $_
                     }
                     finally
                     {
