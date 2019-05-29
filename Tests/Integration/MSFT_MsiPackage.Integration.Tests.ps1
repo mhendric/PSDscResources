@@ -252,7 +252,7 @@ try
 
                         $fileServerStarted.WaitOne(30000)
 
-                        Write-Verbose -Message "$([DateTime]::Now): Finished waiting for file server start2" -Verbose
+                        Write-Verbose -Message "$([DateTime]::Now): Finished waiting for file server start3" -Verbose
 
                         netstat -anb | Write-Verbose -Verbose
 
