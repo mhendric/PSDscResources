@@ -39,7 +39,7 @@ try
                     This log file is used to log messages from the mock server which is important for debugging since
                     most of the work of the mock server is done within a separate process. 
                 #>
-                $script:logFile = Join-Path -Path $PSScriptRoot -ChildPath 'PackageTestLogFile.txt'
+                $script:logFile = Join-Path  -Path $PSScriptRoot -ChildPath 'PackageTestLogFile.txt'
 
                 $script:msiName = 'DSCSetupProject.msi'
                 $script:msiLocation = Join-Path -Path $TestDrive -ChildPath $script:msiName
