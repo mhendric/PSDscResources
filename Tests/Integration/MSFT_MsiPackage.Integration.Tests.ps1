@@ -207,12 +207,14 @@ try
                         Set-TargetResource -Ensure 'Absent' -Path $msiUrl -ProductId $script:packageId
                         Test-PackageInstalledById -ProductId $script:packageId | Should Be $false
                     }
+                    catch {}
                     finally
                     {
                         <#
                             This must be called after Start-Server to ensure the listening port is closed,
                             otherwise subsequent tests may fail until the machine is rebooted.
                         #>
+                        Write-Verbose 'Stopping server' -Verbose
                         Stop-Server -FileServerStarted $fileServerStarted -Job $job
                     }
 
@@ -255,12 +257,14 @@ try
                         Set-TargetResource -Ensure 'Absent' -Path $msiUrl -ProductId $script:packageId
                         Test-PackageInstalledById -ProductId $script:packageId | Should Be $false
                     }
+                    catch {}
                     finally
                     {
                         <#
                             This must be called after Start-Server to ensure the listening port is closed,
                             otherwise subsequent tests may fail until the machine is rebooted.
                         #>
+                        Write-Verbose 'Stopping server' -Verbose
                         Stop-Server -FileServerStarted $fileServerStarted -Job $job
                     }
 
