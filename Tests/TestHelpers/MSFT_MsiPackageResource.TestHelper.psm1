@@ -453,7 +453,7 @@ function Start-Server
         {
             $errorMessage = "There were problems setting up the HTTP(s) listener. Error: $_"
             Write-Log -LogFile $LogPath -Message $errorMessage
-            throw $errorMessage
+            throw $_
         }
         finally
         {
