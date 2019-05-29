@@ -215,7 +215,7 @@ try
                     }
                 }
 
-                It 'Should correctly install and remove a package from a HTTPS URL'  -Skip:$script:skipHttpsTest {
+                It 'Should correctly install and remove a package from a HTTPS URL' -Skip:$script:skipHttpsTest {
 
                     $baseUrl = 'https://localhost:1243/'
                     $msiUrl = "$baseUrl" + 'package.msi'
