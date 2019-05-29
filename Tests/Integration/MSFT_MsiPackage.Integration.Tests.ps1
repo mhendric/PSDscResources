@@ -247,7 +247,7 @@ try
                     }
                     catch
                     {
-                        Write-Warning -Message 'Caught exception performing HTTPS server tests. Outputting HTTPS server log.' -Verbose
+                        Write-Warning -Message  'Caught exception performing HTTPS server tests. Outputting HTTPS server log.' -Verbose
                         Get-Content -Path $script:logFile | Write-Verbose -Verbose
                         throw $_
                     }
