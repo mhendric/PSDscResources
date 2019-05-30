@@ -452,12 +452,22 @@ function Start-Server
         catch
         {
             $errorMessage = "There were problems setting up the HTTP(s) listener. Error: $_"
+
             Write-Log -LogFile $LogPath -Message $errorMessage
             $_ | Out-String >> $LogPath
+
+            'Error Record Info' >> $LogPath
+            $_ | convertto-xml -as string >> $LogPath
+
+            'Exception Info' >> $LogPath
+            $_.Exception | convertto-xml -as string >> $LogPath
+
             'Running Process Info' >> $LogPath
             Get-Process | Out-String >> $LogPath
+
             'Open TCP Connections Info' >> $LogPath
             Get-NetTCPConnection | Out-String >> $LogPath
+
             throw $_
         }
         finally
