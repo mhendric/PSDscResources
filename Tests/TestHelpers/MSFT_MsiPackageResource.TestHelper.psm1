@@ -463,10 +463,10 @@ function Start-Server
             $_.Exception | convertto-xml -as string >> $LogPath
 
             'Running Process Info' >> $LogPath
-            Get-Process | Out-String >> $LogPath
+            Get-Process | fl | Out-String >> $LogPath
 
             'Open TCP Connections Info' >> $LogPath
-            Get-NetTCPConnection | Out-String >> $LogPath
+            Get-NetTCPConnection | fl | Out-String >> $LogPath
 
             throw $_
         }
