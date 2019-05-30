@@ -37,7 +37,7 @@ try
 
                 <#
                     This log file is used to log messages from the mock server which is important for debugging since
-                    most of the work of the mock server is done within a separate process. 
+                    most of the work of the mock server is done within a separate process.
                 #>
                 $script:logFile = Join-Path -Path $PSScriptRoot -ChildPath 'PackageTestLogFile.txt'
 
@@ -171,7 +171,7 @@ try
                 }
 
                 It 'Should correctly install and remove a package from a HTTP URL' {
-                    $baseUrl = 'http://localhost:1242/'
+                    $baseUrl = 'http://localhost:35242/'
                     $msiUrl = "$baseUrl" + 'package.msi'
 
                     $fileServerStarted = $null
@@ -217,7 +217,7 @@ try
 
                 It 'Should correctly install and remove a package from a HTTPS URL' -Skip:$script:skipHttpsTest {
 
-                    $baseUrl = 'https://localhost:1243/'
+                    $baseUrl = 'https://localhost:35243/'
                     $msiUrl = "$baseUrl" + 'package.msi'
 
                     $fileServerStarted = $null
@@ -232,7 +232,7 @@ try
 
                         $serverResult = Start-Server -FilePath $script:msiLocation -LogPath $script:logFile -Https $true
                         $fileServerStarted = $serverResult.FileServerStarted
-                        $job = $serverResult.Job             
+                        $job = $serverResult.Job
 
                         # Wait for the file server to be ready to receive requests
                         $fileServerStarted.WaitOne(30000)
